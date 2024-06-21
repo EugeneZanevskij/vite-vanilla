@@ -1,9 +1,9 @@
-import conf from '/src/data/configuration.json' with { type: 'json' };
-import deLang from '/src/data/de.json' with { type: 'json' };
-import enLang from '/src/data/en.json' with { type: 'json' };
-import esLang from '/src/data/es.json' with { type: 'json' };
-import duLang from '/src/data/du.json' with { type: 'json' };
-import ruLang from '/src/data/ru.json' with { type: 'json' };
+import conf from '/public/data/configuration.json' with { type: 'json' };
+import deLang from '/public/data/de.json' with { type: 'json' };
+import enLang from '/public/data/en.json' with { type: 'json' };
+import esLang from '/public/data/es.json' with { type: 'json' };
+import duLang from '/public/data/du.json' with { type: 'json' };
+import ruLang from '/public/data/ru.json' with { type: 'json' };
 const resources = { de: { translation: deLang }, en: { translation: enLang }, es: { translation: esLang }, du: { translation: duLang }, ru: { translation: ruLang } };
 
 function getConfigQueryParams() {
@@ -26,7 +26,7 @@ function getConfigQueryParams() {
 }
 
 let configuration = conf;
-updateWidget(configuration);
+// updateWidget(configuration);
 const params = getConfigQueryParams();
 let configUrl  = 'https://contact.versacloud.io/data/configuration.json';
 const getParams = () => {
@@ -37,6 +37,7 @@ const getParams = () => {
         .then((data) => {
           configUrl = params["config-url"];
           configuration = data;
+          console.log(data);
           resolve();
         })
         .catch((error) => reject(error));
@@ -52,6 +53,7 @@ getParams()
     updateWidget(configuration);
   })
   .catch((error) => {
+    updateWidget(configuration);
     console.error('Error getting configuration data:', error);
   });
 
