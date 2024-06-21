@@ -21,4 +21,11 @@ document.querySelector('#app').innerHTML = `
   </div>
 `
 
+function initWidget(config, configUrl) {
+  var iframe = document.createElement('iframe');
+  iframe.src = "./demo.html";
+  document.body.appendChild(iframe);
+}
+initWidget()
+
 setupCounter(document.querySelector('#counter'))
