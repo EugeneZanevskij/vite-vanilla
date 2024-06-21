@@ -1,44 +1,20 @@
-import { defineConfig } from 'vite'
-import path from 'path'
-import fs from 'fs'
-
-function getHtmlEntryFiles(srcDir) {
-	const entry = {};
-
-	function traverseDir(currentDir) {
-	  const files = fs.readdirSync(currentDir);
-
-	  files.forEach((file) => {
-		const filePath = path.join(currentDir, file);
-		const isDirectory = fs.statSync(filePath).isDirectory();
-
-		if (isDirectory) {
-		  // If it's a directory, recursively traverse it
-		  traverseDir(filePath);
-		} else if (path.extname(file) === '.html') {
-		  // If it's an HTML file, add it to the entry object
-		  const name = path.relative(srcDir, filePath).replace(/\..*$/, '');
-		  entry[name] = filePath;
-		}
-	  });
-	}
-
-	traverseDir(srcDir);
-
-	return entry;
-}
-
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-	root: '.',
-	build: {
-		rollupOptions: {
-			input: getHtmlEntryFiles('.')
-		},
-		outDir: 'dist',
-		emptyOutDir: true
-	},
-	optimizeDeps: {
-		entries: './*{.html,.css,.js}'
-	}
-})
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        demo: 'widget/demo.html',
+      },
+      output: {
+        entryFileNames: 'scripts/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]',
+      },
+    },
+  },
+  // Specify assets to be copied directly to 'dist'
+  assetsInclude: ['data/**'],
+});
