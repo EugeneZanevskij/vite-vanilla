@@ -1,5 +1,5 @@
 {
-  "widgetSrc" : "/widget/widget.html",
+  "widgetSrc" : "https://vite-vanilla-olive.vercel.app/widget/widget.html",
   "active": true,
   "call_to_action_image": "https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no",
   "call_to_action_text": "👋 Hey there, I'm here to help",
