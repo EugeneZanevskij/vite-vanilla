@@ -39,6 +39,6 @@ export default defineConfig({
 		emptyOutDir: true
 	},
 	optimizeDeps: {
-		entries: './**/*{.html,.css,.js}'
+		entries: './*{.html,.css,.js}'
 	}
 })
