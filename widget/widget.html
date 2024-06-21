@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/locale/de/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/locale/es/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/locale/ru/cdn.min.js"></script>
+    <script src="https://unpkg.com/i18next@21.8.12/dist/umd/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector@6.1.4/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
+  </head>
+  <body>
+    <div class="contact-widget">
+      <div class="contact-widget-overlay"></div>
+      <div class="contact-widget-cta">
+        <div class="contact-widget-cta-container">
+          <img class="contact-widget-cta-image" src="" alt="">
+        </div>
+        <div class="contact-widget-text-container contact-widget-box-shadow contact-widget-round contact-widget-cta-right" style="display: block; background-color: rgb(18, 153, 133); color: rgba(255, 255, 255, 0.7);">
+          <span class="arrow" style="border-left-color: rgb(18, 153, 133);"></span>
+          <span id="cta_text"></span>
+          <span class="dots">...</span>
+      </div>
+      </div>
+      <div class="contact-widget-container">
+        <div class="contact-widget-header" id="header">
+          <a id="saveContact" target="_blank" class="contact-widget-save-contact-link" title="Would you like to get in touch at a later time? Save our contact details to your address book.">
+            <img src="./assets/card-account-phone-outline.svg" alt="" class="contact-widget-save-contact-icon-1">
+            <span data-i18n="saveContact">Save contact</span>
+          </a>
+          <i class="fa-solid fa-xmark contact-widget-close"></i>
+        </div>
+        <!-- <a href="https://www.versacommerce.de/" target="_blank" class="contact-widget-branding" style="display: inline;"><img src="./assets/versacommerce.webp" alt="" class="contact-widget-branding-image"> <span data-i18n="poweredBy">powered by</span> <span class="contact-widget-branding-text">VersaCommerce</span></a> -->
+        <div class="contact-widget-inner">
+          <div class="contact-widget-local-time">Tuesday, June 4th</div>
+          <div class="contact-widget-grid">
+            <div class="contact-widget-inner-image-wrapper">
+              <img class="contact-widget-inner-image" src="https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no" alt="">
+            </div>
+            <div class="">
+              <div class="contact-widget-message" id="welcomeMessage" data-i18n="welcomeMessage"> 
+                👋 Hi, my name is Sergiusz
+              </div>
+              <div class="contact-widget-message" id="videoMessage" style="margin-top: 10px; width: 100%;">
+                <iframe id="video_message_iframe" width="100%" height="178" src="https://www.youtube.com/embed/UV0mhY2Dxr0?autoplay=1&mute=1&loop=1&rel=0&showinfo=0&controls=2&fs=0&modestbranding=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;" allowfullscreen></iframe>
+              </div>
+              <div class="contact-widget-message" data-i18n="contactChannelMessage">Choose a contact channel:</div>
+              <div class="contact-widget-buttons">
+                <div class="contact-widget-button contact-widget-subpage-open contact-widget-button--watsapp" data-for="contact-widget-subpage-watsapp">
+                  <span class="contact-widget-button-title">WhatsApp</span>
+                  <span class="contact-widget-button-icon-wrapper">
+                    <i class="fab fa-whatsapp"></i>
+                  </span>
+                </div>
+                <div class="contact-widget-button contact-widget-subpage-open contact-widget-button--messenger" data-for="contact-widget-subpage-messenger">
+                  <span class="contact-widget-button-title">Messenger</span>
+                  <span class="contact-widget-button-icon-wrapper">
+                    <i class="fab fa-facebook-messenger"></i>
+                  </span>
+                </div>
+                <div class="contact-widget-button contact-widget-subpage-open contact-widget-button--email" data-for="contact-widget-subpage-email">
+                  <span class="contact-widget-button-title" data-i18n="emailMainButton">Email</span>
+                  <span class="contact-widget-button-icon-wrapper">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </div>
+                <div class="contact-widget-button contact-widget-subpage-open contact-widget-button--call" data-for="contact-widget-subpage-call">
+                  <span class="contact-widget-button-title" data-i18n="callMainButton">Call</span>
+                  <span class="contact-widget-button-icon-wrapper">
+                    <i class="fas fa-phone"></i>
+                  </span>
+                </div>
+                <div class="contact-widget-button contact-widget-subpage-open contact-widget-button--sms" data-for="contact-widget-subpage-sms">
+                  <span class="contact-widget-button-title" data-i18n="smsMainButton">SMS</span>
+                  <span class="contact-widget-button-icon-wrapper">
+                    <i class="fas fa-comment"></i>
+                  </span>
+                </div>
+                <div class="contact-widget-button contact-widget-subpage-open contact-widget-button--callback" data-for="contact-widget-subpage-callback">
+                  <span class="contact-widget-button-title" data-i18n="callbackMainButton">Call back</span>
+                  <span class="contact-widget-button-icon-wrapper">
+                    <i class="fas fa-phone-volume"></i>
+                  </span>
+                </div>
+                <div class="contact-widget-button contact-widget-subpage-open contact-widget-button--twitter" data-for="contact-widget-subpage-twitter">
+                  <span class="contact-widget-button-title">Twitter</span>
+                  <span class="contact-widget-button-icon-wrapper">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </div>
+                <div class="contact-widget-button contact-widget-subpage-open contact-widget-button--telegram" data-for="contact-widget-subpage-telegram">
+                  <span class="contact-widget-button-title">Telegram</span>
+                  <span class="contact-widget-button-icon-wrapper">
+                    <i class="fab fa-telegram"></i>
+                  </span>
+                </div>
+                <div class="contact-widget-button contact-widget-subpage-open contact-widget-button--viber" data-for="contact-widget-subpage-viber">
+                  <span class="contact-widget-button-title">Viber</span>
+                  <span class="contact-widget-button-icon-wrapper">
+                    <i class="fab fa-viber"></i>
+                  </span>
+                </div>
+                <div id="show-route-button" class="contact-widget-button contact-widget-subpage-open contact-widget-button--route">
+                  <span class="contact-widget-button-title" data-i18n="showRoute">Show route</span>
+                  <span class="contact-widget-button-icon-wrapper">
+                    <i class="fa-solid fa-map"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-widget-footer" id="footer">
+          <div class="contact-widget-open-hours-link" id="openingHoursLink">
+            <i class="fas fa-clock contact-widget-open-hours-icon-1"></i>
+            <span class="today_status">
+              <b>open</b> (Tue 9:00 AM - 7:00 PM) </span>
+            <i class="fas fa-caret-up"></i>
+            </a>
+          </div>
+          <div class="contact-widget-open-hours contact-widget-subpage" id="openingHoursPage">
+            <div>
+              <div class="contact-widget-open-hours-header">
+                <div class="contact-widget-open-hours-close">
+                  <i class="fas fa-chevron-left"></i>
+                </div>
+                <span class="contact-widget-open-hours-header-text">
+                  <i class="fas fa-globe"></i>
+                  <span data-i18n="localTime">Local time</span>: <span class="contact-widget-open-hours-local-time">11:50 am</span>
+                </span>
+              </div>
+              <table class="contact-widget-open-hours-table">
+                <tbody>
+                  <tr id="Monday" class="1" itemprop="openingHours">
+                    <td class="day">Monday</td>
+                    <td class="opens"></td>
+                    <td>-</td>
+                    <td class="closes"></td>
+                  </tr>
+                  <tr id="Monday2" class="1" style="display:none;">
+                    <td>+</td>
+                    <td class="opens2 split"></td>
+                    <td class="split">-</td>
+                    <td class="closes2 split"></td>
+                  </tr>
+                  <tr id="Tuesday" class="2" itemprop="openingHours">
+                    <td class="day">Tuesday</td>
+                    <td class="opens"></td>
+                    <td>-</td>
+                    <td class="closes"></td>
+                  </tr>
+                  <tr id="Tuesday2" class="2" style="display:none;">
+                    <td>+</td>
+                    <td class="opens2 split"></td>
+                    <td class="split">-</td>
+                    <td class="closes2 split"></td>
+                  </tr>
+                  <tr id="Wednesday" class="3" itemprop="openingHours">
+                    <td class="day">Wednesday</td>
+                    <td class="opens"></td>
+                    <td>-</td>
+                    <td class="closes"></td>
+                  </tr>
+                  <tr id="Wednesday2" class="3 today" style="display:none;">
+                    <td>+</td>
+                    <td class="opens2 split"></td>
+                    <td class="split">-</td>
+                    <td class="closes2 split"></td>
+                  </tr>
+                  <tr id="Thursday" class="4" itemprop="openingHours">
+                    <td class="day">Thursday</td>
+                    <td class="opens"></td>
+                    <td>-</td>
+                    <td class="closes"></td>
+                  </tr>
+                  <tr id="Thursday2" class="4" style="display:none;">
+                    <td>+</td>
+                    <td class="opens2 split"></td>
+                    <td class="split">-</td>
+                    <td class="closes2 split"></td>
+                  </tr>
+                  <tr id="Friday" class="5" itemprop="openingHours">
+                    <td class="day">Friday</td>
+                    <td class="opens"></td>
+                    <td>-</td>
+                    <td class="closes"></td>
+                  </tr>
+                  <tr id="Friday2" class="5" style="display:none;">
+                    <td>+</td>
+                    <td class="opens2 split"></td>
+                    <td class="split">-</td>
+                    <td class="closes2 split"></td>
+                  </tr>
+                  <tr id="Saturday" class="6" itemprop="openingHours">
+                    <td class="day">Saturday</td>
+                    <td class="opens"></td>
+                    <td>-</td>
+                    <td class="closes"></td>
+                  </tr>
+                  <tr id="Saturday2" class="6" style="display:none;">
+                    <td>+</td>
+                    <td class="opens2 split"></td>
+                    <td class="split">-</td>
+                    <td class="closes2 split"></td>
+                  </tr>
+                  <tr id="Sunday" class="7" itemprop="openingHours">
+                    <td class="day">Sunday</td>
+                    <td class="opens"></td>
+                    <td>-</td>
+                    <td class="closes"></td>
+                  </tr>
+                  <tr id="Sunday2" class="7" style="display:none;">
+                    <td>+</td>
+                    <td class="opens2 split"></td>
+                    <td class="split">-</td>
+                    <td class="closes2 split"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="contact-widget-open-hours-status">
+                <i class="fas fa-clock"></i>
+                <span class="hours-status"> currently open </span>
+              </span>
+            </div>
+          </div>
+          <div class="contact-widget-subpage contact-widget-subpage-watsapp">
+            <div class="contact-widget-subpage-header">
+              <div class="contact-widget-subpage-close">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <span class="contact-widget-subpage-header-text">
+                <i class="fab fa-whatsapp"></i> WhatsApp </span>
+            </div>
+            <div class="contact-widget-subpage-body">
+              <div class="contact-widget-grid">
+                <div class="contact-widget-inner-image-wrapper">
+                  <img class="contact-widget-inner-image" src="https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no" alt="">
+                </div>
+                <div class="contact-widget-inner-content">
+                  <div class="contact-widget-message" data-i18n="questionText">How can we help you?</div>
+                  <div class="contact-widget-reply-info">
+                    <b>11:38 AM</b> - <span class="contact-widget-reply-info-response">Typically replies within a few hours</span>
+                  </div>
+                  <div class="contact-widget-watsapp-textarea-wrapper">
+                    <textarea name="name" rows="14" placeholder="Type your message..." class="contact-widget-watsapp-textarea"></textarea>
+                  </div>
+                  <span class="contact-widget-subpage-cta" id="whatsapp-button">
+                    <i class="fab fa-whatsapp"></i>
+                    <span data-i18n="whatsAppButton">Send WhatsApp message</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-widget-subpage contact-widget-subpage-messenger">
+            <div class="contact-widget-subpage-header">
+              <div class="contact-widget-subpage-close">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <span class="contact-widget-subpage-header-text">
+                <i class="fab fa-facebook-messenger"></i> Facebook Messenger </span>
+            </div>
+            <div class="contact-widget-subpage-body">
+              <div class="contact-widget-grid">
+                <div class="contact-widget-inner-image-wrapper">
+                  <img class="contact-widget-inner-image" src="https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no" alt="">
+                </div>
+                <div class="contact-widget-inner-content">
+                  <div class="contact-widget-message" data-i18n="messengerText">Please use the "Start conversation" button below or scan the QR Code to instantly start a Messenger conversation from your smartphone.</div>
+                  <div class="contact-widget-message">
+                    <span data-i18n="messengerQRText">Messenger QR Code:</span>
+                    <img class="contact-widget-qr" src="./assets/versacommerce-qr.svg" alt="scan to start chat">
+                  </div>
+                  <div class="contact-widget-reply-info">
+                    <b>11:38 AM</b> - <span class="contact-widget-reply-info-response">Typically replies within a few hours</span>
+                  </div>
+                  <span class="contact-widget-subpage-cta" id="fmessenger-button">
+                    <i class="fab fa-facebook-messenger"></i>
+                    <span data-i18n="messengerButton">Start new conversation</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-widget-subpage contact-widget-subpage-email">
+            <div class="contact-widget-subpage-header">
+              <div class="contact-widget-subpage-close">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <span class="contact-widget-subpage-header-text">
+                <i class="fas fa-envelope"></i> <span data-i18n="emailMainButton"></span></span>
+            </div>
+            <div class="contact-widget-subpage-body">
+              <div class="contact-widget-grid">
+                <div class="contact-widget-inner-image-wrapper">
+                  <img class="contact-widget-inner-image" src="https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no" alt="">
+                </div>
+                <div class="contact-widget-inner-content">
+                  <div class="contact-widget-message">
+                    <span data-i18n="emailText">Please enter your message below or send an email to</span>
+                    <a class="contact-widget-email" href="#">savitsky@versacommerce.de</a>
+                  </div>
+                  <div class="contact-widget-reply-info">
+                    <b>11:38 AM</b> - <span class="contact-widget-reply-info-response">Typically replies within a few hours</span>
+                  </div>
+                  <div class="contact-widget-form-wrapper">
+                    <form class="contact-widget-form" id="contactMessageForm" action="#" method="POST" enctype="multipart/form-data">
+                      <input type="text" name="name" class="contact-widget-form-input" placeholder="Name" required>
+                      <input type="email" name="email" class="contact-widget-form-input" placeholder="Email" required>
+                      <input type="hidden" name="to" class="contact-widget-form-input" value="savitsky@versacommerce.de">
+                      <textarea name="text" rows="12" placeholder="Type your message..." class="contact-widget-form-textarea" required></textarea>
+                    </form>
+                  </div>
+                  <span class="contact-widget-subpage-cta contact-widget-email-button" id="sendMessageButton">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-i18n="emailButton">Send message</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-widget-subpage contact-widget-subpage-call">
+            <div class="contact-widget-subpage-header">
+              <div class="contact-widget-subpage-close">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <span class="contact-widget-subpage-header-text">
+                <i class="fas fa-phone"></i> <span data-i18n="callMainButton"></span> </span>
+            </div>
+            <div class="contact-widget-subpage-body">
+              <div class="contact-widget-grid">
+                <div class="contact-widget-inner-image-wrapper">
+                  <img class="contact-widget-inner-image" src="https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no" alt="">
+                </div>
+                <div class="contact-widget-inner-content">
+                  <div class="contact-widget-message"> 
+                    <span data-i18n="phoneText">Please use the "Call now" button below or call</span> 
+                    <a class="contact-widget-phone" href="#"></a>
+                  </div>
+                  <div class="contact-widget-message">
+                    <span data-i18n="phoneQRText">Scan the QR Code to instantly call from your smartphone.
+                    </span>
+                    <img class="contact-widget-qr" src="./assets/versacommerce-qr.svg" alt="scan to start chat">
+                  </div>
+                  <div class="contact-widget-reply-info">
+                    <b>11:38 AM</b>
+                  </div>
+                  <a href="#" class="contact-widget-subpage-cta" id="phone-button">
+                    <i class="fas fa-phone btn-phone-icon"></i>
+                    <span data-i18n="phoneButton">Call now</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-widget-subpage contact-widget-subpage-sms">
+            <div class="contact-widget-subpage-header">
+              <div class="contact-widget-subpage-close">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <span class="contact-widget-subpage-header-text">
+                <i class="fas fa-comment"></i> <span data-i18n="smsMainButton"></span> </span>
+            </div>
+            <div class="contact-widget-subpage-body">
+              <div class="contact-widget-grid">
+                <div class="contact-widget-inner-image-wrapper">
+                  <img class="contact-widget-inner-image" src="https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no" alt="">
+                </div>
+                <div class="contact-widget-inner-content">
+                  <div class="contact-widget-message"> 
+                    <span data-i18n="smsText">Please use the "Send SMS" button below or send an SMS to</span>
+                    <a class="contact-widget-sms" href="#"></a>
+                  </div>
+                  <div class="contact-widget-message">
+                    <span data-i18n="smsQRText">Scan the QR Code to instantly send a SMS message from your smartphone.</span>
+                    <img class="contact-widget-qr" src="./assets/versacommerce-qr.svg" alt="scan to start chat">
+                  </div>
+                  <div class="contact-widget-reply-info">
+                    <b>11:38 AM</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-widget-subpage contact-widget-subpage-callback">
+            <div class="contact-widget-subpage-header">
+              <div class="contact-widget-subpage-close">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <span class="contact-widget-subpage-header-text">
+                <i class="fas fa-phone-volume"></i> <span data-i18n="callbackMainButton"></span> </span>
+            </div>
+            <div class="contact-widget-subpage-body">
+              <div class="contact-widget-grid">
+                <div class="contact-widget-inner-image-wrapper">
+                  <img class="contact-widget-inner-image" src="https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no" alt="">
+                </div>
+                <div class="contact-widget-inner-content">
+                  <div class="contact-widget-message" data-i18n="callbackText">Would you like us to call you back?</div>
+                  <div class="contact-widget-message" style="width: 100%;">
+                    <span data-i18n="callbackFormText"> Please send us your name and phone number, we will call you back as soon as possible. </span>
+                    <form action="#" id="callbackForm" method="POST" enctype="multipart/form-data">
+                      <input type="tel" name="tel" class="contact-widget-form-input" placeholder="Phone number" required>
+                      <input type="text" name="name" class="contact-widget-form-input" placeholder="Name" required>
+                      <button type="submit" id="callbackButton">
+                        <i class="fas fa-phone-volume"></i>
+                        <span class="channel_button_callback" data-i18n="callbackButton">Call me for free</span>
+                      </button>
+                    </form>
+                  </div>
+                  <div class="contact-widget-reply-info">
+                    <b>11:38 AM</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-widget-subpage contact-widget-subpage-twitter">
+            <div class="contact-widget-subpage-header">
+              <div class="contact-widget-subpage-close">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <span class="contact-widget-subpage-header-text">
+                <i class="fab fa-twitter"></i> Twitter </span>
+            </div>
+            <div class="contact-widget-subpage-body">
+              <div class="contact-widget-grid">
+                <div class="contact-widget-inner-image-wrapper">
+                  <img class="contact-widget-inner-image" src="https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no" alt="">
+                </div>
+                <div class="contact-widget-inner-content">
+                  <div class="contact-widget-message" data-i18n="questionText">How can we help you?</div>
+                  <div class="contact-widget-reply-info">
+                    <b>11:38 AM</b> - <span class="contact-widget-reply-info-response">Typically replies within a few hours</span>
+                  </div>
+                  <span class="contact-widget-subpage-cta" id="twitter-button">
+                    <i class="fab fa-twitter"></i>
+                    <span class="channel_button_twitter" data-i18n="twitterButton">Start new conversation</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-widget-subpage contact-widget-subpage-telegram">
+            <div class="contact-widget-subpage-header">
+              <div class="contact-widget-subpage-close">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <span class="contact-widget-subpage-header-text">
+                <i class="fab fa-telegram"></i> Telegram </span>
+            </div>
+            <div class="contact-widget-subpage-body">
+              <div class="contact-widget-grid">
+                <div class="contact-widget-inner-image-wrapper">
+                  <img class="contact-widget-inner-image" src="https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no" alt="">
+                </div>
+                <div class="contact-widget-inner-content">
+                  <div class="contact-widget-message contact-widget-telegram-text" data-i18n="questionText">How can we help you?</div>
+                  <div class="contact-widget-reply-info">
+                    <b>11:38 AM</b> - <span class="contact-widget-reply-info-response">Typically replies within a few hours</span>
+                  </div>
+                  <span class="contact-widget-subpage-cta" id="telegram-button">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span class="channel_button_telegram" data-i18n="telegramButton">Send Telegram message</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-widget-subpage contact-widget-subpage-viber">
+            <div class="contact-widget-subpage-header">
+              <div class="contact-widget-subpage-close">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <span class="contact-widget-subpage-header-text">
+                <i class="fab fa-viber"></i> Viber </span>
+            </div>
+            <div class="contact-widget-subpage-body">
+              <div class="contact-widget-grid">
+                <div class="contact-widget-inner-image-wrapper">
+                  <img class="contact-widget-inner-image" src="https://lh3.googleusercontent.com/a/ACg8ocIgVlpl5tIG3guPEROVRgr9PSGUdXZn32hf8UMWqlP-S6s18IE=s288-c-no" alt="">
+                </div>
+                <div class="contact-widget-inner-content">
+                  <div class="contact-widget-message contact-widget-viber-text" data-i18n="questionText">How can we help you?</div>
+                  <div class="contact-widget-reply-info">
+                    <b>11:38 AM</b> - <span class="contact-widget-reply-info-response">Typically replies within a few hours</span>
+                  </div>
+                  <span class="contact-widget-subpage-cta" id="viber-button">
+                    <i class="fab fa-viber"></i>
+                    <span class="channel_button_viber" data-i18n="viberButton">Send Viber message</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./scripts/index.js"></script>
+  </body>
+</html>
