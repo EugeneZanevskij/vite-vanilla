@@ -83,7 +83,7 @@ if (configuration.widget_alignment ===  "Left") {
 document.querySelector('#header').style.background = configuration.background_color;
 document.querySelector('#footer').style.background = configuration.background_color;
 document.querySelector('.contact-widget-cta-image').src = configuration.call_to_action_image;
-document.querySelector('.contact-widget-inner-image').src = configuration.call_to_action_image;
+document.querySelectorAll('.contact-widget-inner-image').forEach(el => el.src = configuration.call_to_action_image);
 document.querySelectorAll('.contact-widget-reply-info-response').forEach(el => el.textContent = configuration.response_time);
 if (!configuration.show_business_hours) {
   const openingHoursLink = document.querySelector('#openingHoursLink')
