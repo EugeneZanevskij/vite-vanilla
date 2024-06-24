@@ -9,7 +9,7 @@
     "video_welcome_message": "",
     "background_color": "#f1f1f1",
     "company_name": "Sergey",
-    "chatbox_triggers": "On CTA click",
+    "chatbox_triggers": "After 5 seconds",
     "display_options": "Square",
     "widget_alignment": "Left",
     "response_time": "Typically replies in an hour",

@@ -102,13 +102,6 @@ const contactWidgetCta = document.querySelector('.contact-widget-cta');
 const contactWidgetClose = document.querySelector('.contact-widget-close');
 const contactWidgetOverlay = document.querySelector('.contact-widget-overlay');
 const openChatBox = () => {
-  contactWidget.classList.toggle('contact-widget--is-visible');
-  if (!showDarkBackgroundOverlay) {
-    contactWidgetOverlay.style.position = 'static';
-  }
-};
-
-contactWidgetCta.addEventListener('click', () => {
   if (contactWidget.classList.contains('contact-widget--is-visible')) {
     closeCTA();
     contactWidget.classList.remove('contact-widget--is-visible');
@@ -123,6 +116,10 @@ contactWidgetCta.addEventListener('click', () => {
   if (!configuration.show_dark_background_overlay) {
     contactWidgetOverlay.style.position = 'static';
   }
+};
+
+contactWidgetCta.addEventListener('click', () => {
+  openChatBox();
 });
 
 contactWidgetClose.addEventListener('click', () => {
