@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import html from '@rollup/plugin-html';
 
 export default defineConfig({
   build: {
