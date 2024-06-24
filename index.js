@@ -15,7 +15,22 @@
   }
 
   var currentScript=document.querySelector('script[data-config-url]');
-  var configUrl = currentScript?.getAttribute('data-config-url')||'./data/configuration.json';
+  var pathname = window.location.pathname;
+  var configUrl = currentScript?.getAttribute('data-config-url')|| '';
+  if (configUrl === '') {
+      switch (pathname) {
+          case '/demo_1.html':
+              configUrl = 'https://vite-vanilla-olive.vercel.app/data/configuration_1.json';
+              console.log(pathname);
+              break;
+            case '/demo_3.html':
+                configUrl = 'https://vite-vanilla-olive.vercel.app/data/configuration_3.json';
+                console.log(pathname);
+              break;
+          default:
+              configUrl = 'https://vite-vanilla-olive.vercel.app/data/configuration.json';
+      }
+  }
 
   function initWidget(config, configUrl) {
     var iframe = document.createElement('iframe');
