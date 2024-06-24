@@ -21,11 +21,9 @@
       switch (pathname) {
           case '/demo_1.html':
               configUrl = 'https://vite-vanilla-olive.vercel.app/data/configuration_1.json';
-              console.log(pathname);
               break;
             case '/demo_3.html':
                 configUrl = 'https://vite-vanilla-olive.vercel.app/data/configuration_3.json';
-                console.log(pathname);
               break;
           default:
               configUrl = 'https://vite-vanilla-olive.vercel.app/data/configuration.json';

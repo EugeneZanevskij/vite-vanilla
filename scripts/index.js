@@ -42,7 +42,6 @@ const getParams = () => {
         .then((data) => {
           configUrl = params["config-url"];
           configuration = data;
-          console.log(data);
           resolve();
         })
         .catch((error) => reject(error));
@@ -179,7 +178,6 @@ renderButtons();
 
 document.querySelectorAll('.contact-widget-subpage-open').forEach((item) => {
   item.addEventListener('click', () => {
-    console.log(item);
     const subpage = document.querySelector(`.${item.getAttribute('data-for')}`);
     const formattedTime = format(currentDateZoned, "h:mm aa");
     subpage.querySelector('.contact-widget-reply-info b').textContent = formattedTime;
