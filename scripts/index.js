@@ -1,3 +1,8 @@
+import { format } from "date-fns";
+import { de, es, ru } from "date-fns/locale";
+import i18next from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { toZonedTime } from 'date-fns-tz';
 import conf from '/public/data/configuration.json' with { type: 'json' };
 import deLang from '/public/data/de.json' with { type: 'json' };
 import enLang from '/public/data/en.json' with { type: 'json' };
@@ -142,10 +147,11 @@ window.addEventListener('message', event => {
 const contactWidgetOpenHoursLink = document.querySelector('.contact-widget-open-hours-link');
 const contactWidgetOpenHoursClose = document.querySelector('.contact-widget-open-hours-close');
 const contactWidgetOpenHours = document.querySelector('.contact-widget-open-hours');
+const currentDateZoned = toZonedTime(new Date(), configuration.timezone);
 
 contactWidgetOpenHoursLink?.addEventListener('click', () => {
   contactWidgetOpenHours.classList.add('contact-widget-subpage--is-visible');
-  document.querySelector('.contact-widget-open-hours-local-time').textContent = configuration.business_hours_24h_format ? dateFns.format(new Date(), 'HH:mm') : dateFns.format(new Date(), 'h:mm a');
+  document.querySelector('.contact-widget-open-hours-local-time').textContent = configuration.business_hours_24h_format ? format(currentDateZoned, 'HH:mm') : format(currentDateZoned, 'h:mm a');
 });
 
 contactWidgetOpenHoursClose?.addEventListener('click', () => {
@@ -178,7 +184,7 @@ document.querySelectorAll('.contact-widget-subpage-open').forEach((item) => {
   item.addEventListener('click', () => {
     console.log(item);
     const subpage = document.querySelector(`.${item.getAttribute('data-for')}`);
-    const formattedTime = dateFns.format(new Date(), "h:mm aa");
+    const formattedTime = format(currentDateZoned, "h:mm aa");
     subpage.querySelector('.contact-widget-reply-info b').textContent = formattedTime;
 
     subpage.classList.add('contact-widget-subpage--is-visible');
@@ -462,7 +468,7 @@ const getWidgetLanguage = () => {
   }
 }
 
-i18next.use(i18nextBrowserLanguageDetector).init({
+i18next.use(LanguageDetector).init({
   resources,
   lng: getWidgetLanguage(),
   fallbackLng: 'de',
@@ -499,17 +505,17 @@ function updateContent() {
       case 'en':
         return undefined;
       case 'ru':
-        return dateFns.locale.ru;
+        return ru;
       case 'es':
-        return dateFns.locale.es;
+        return es;
       default:
-        return dateFns.locale.de;
+        return de;
     }
   };
   
   document.querySelector('#welcomeMessage').textContent = configuration.welcome_message;
   const locale = getDateFnsLocale();
-  document.querySelector('.contact-widget-local-time').textContent = dateFns.format(new Date(), 'eeee, MMMM do', { locale });
+  document.querySelector('.contact-widget-local-time').textContent = format(currentDateZoned, 'eeee, MMMM do', { locale });
   
   const timeToAmPm = (time) => {
     const [hours, minutes] = time.split(':');
@@ -519,11 +525,11 @@ function updateContent() {
   };
   
   const getCurrentDay = () => {
-    return dateFns.format(new Date(), 'eeee');
+    return format(currentDateZoned, 'eeee');
   };
   
   const getCurrentDayLocale = () => {
-    return dateFns.format(new Date(), 'eeee', { locale });
+    return format(currentDateZoned, 'eeee', { locale });
   };
   
   const daysMapping = {
@@ -545,7 +551,7 @@ function updateContent() {
   };
   
   const currentDay = getCurrentDay();
-  const currentTime = new Date();
+  const currentTime = currentDateZoned;
   let isOpen = false;
   
   const openText = i18next.t("openText");
@@ -567,7 +573,7 @@ function updateContent() {
       dayRow.classList.add('contact-widget-open-hours-today');
   
       if (!times.includes("Geschlossen")) {
-        const fixedCurrentTime = dateFns.format(currentTime, 'HH:mm');  
+        const fixedCurrentTime = format(currentTime, 'HH:mm');  
         const compareTime = (currentTime, openTime, closeTime) => {
           const currentDateTime = parseTime(currentTime);
           const openDateTime = parseTime(openTime);
@@ -578,7 +584,7 @@ function updateContent() {
         
         const parseTime = (timeString) => {
           const [hours, minutes] = timeString.split(':');
-          const date = new Date();
+          const date = currentDateZoned;
           date.setHours(parseInt(hours, 10));
           date.setMinutes(parseInt(minutes, 10));
           date.setSeconds(0);
